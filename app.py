@@ -31,15 +31,18 @@ def get_ship(ship_id):
     '''
     json_response = requests.get(SHIPS_URL + str(ship_id)).json()
     return json_response
+
+
 app = Flask(__name__)
 
 
 @app.route('/')
 def index():
-    #context = {
-    #    "films": get_films()['results'],
-    #}
-    return render_template("index.html")
+    context = {
+        "films": get_films()['results'],
+    }
+    return render_template("index.html", **context)
 
 if __name__ == '__main__':
-    app.run()
+    port = int(os.environ.get('PORT'))
+    app.run(host='0.0.0.0', port=port)
