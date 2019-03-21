@@ -36,10 +36,10 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    context = {
-        "films": get_films()['results'],
-    }
-    return render_template("index.html", **context)
+    #context = {
+    #    "films": get_films()['results'],
+    #}
+    return render_template("index.html")
 
 if __name__ == '__main__':
     app.run()
