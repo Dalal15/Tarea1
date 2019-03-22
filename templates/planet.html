@@ -4,7 +4,67 @@
    <div class="about">
      <h1>Planet Information</h1>
      <h2>{{response['name']}}</h2>
+     <table>
+       <tbody>
 
+             <tr>
+               <th><center>Rotation period</center></th>
+               <td><center>{{response['rotation_period']}}</center></td>
+              </tr>
+              <tr>
+                <th><center>Orbital period</center></th>
+                <td><center>{{response['orbital_period']}}</center></td>
+               </tr>
+               <tr>
+                 <th><center>Diameter</center></th>
+                 <td><center>{{response['diameter']}}</center></td>
+                </tr>
+                <tr>
+                  <th><center>Climate</center></th>
+                  <td><center>{{response['climate']}}</center></td>
+                 </tr>
+                 <tr>
+                   <th><center>Gravity</center></th>
+                   <td><center>{{response['gravity']}}</center></td>
+                  </tr>
+                  <tr>
+                    <th><center>Terrain</center></th>
+                    <td><center>{{response['terrain']}}</center></td>
+                   </tr>
+                   <tr>
+                     <tr>
+                       <th><center>Surface water</center></th>
+                       <td><center>{{response['surface_water']}}</center></td>
+                      </tr>
+                      <tr>
+                        <th><center>Population</center></th>
+                        <td><center>{{response['population']}}</center></td>
+                       </tr>
+
+                  <tr>
+                    <th><center>Films</center></th>
+                    <td><center> {% for film in response['films']  %}
+                          <ul>
+                            <li> <a href={{"http://127.0.0.1:5000/film/" + film[::-1].split('/')[1][::-1]}}>{{films[film]}}</a></li>
+                          </ul>
+                          {% endfor %}
+                          </center></td>
+                   </tr>
+                   <tr>
+                     <th><center>Residents</center></th>
+                     <td><center> {% for char in response['residents']  %}
+                           <ul>
+                             <li> <a href={{"http://127.0.0.1:5000/people/" + char[::-1].split('/')[1][::-1]}}>{{people[char]}}</a></li>
+                           </ul>
+                           {% endfor %}
+                           </center></td>
+                    </tr>
+
+
+
+
+         </tbody>
+       </table>
    </div>
   </body>
 </html>

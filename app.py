@@ -74,6 +74,25 @@ def get_starship():
 
     return data
 
+def get_films_data():
+
+    json_response = requests.get(FILM_URL).json()
+
+    data = dict()
+
+    while json_response['next']:
+
+        for film in json_response['results']:
+            data[film['url']] = film['title']
+
+        json_response = requests.get(json_response['next']).json()
+
+    for film in json_response['results']:
+        data[film['url']] = film['title']
+
+    return data
+
+
 def get_url(url):
 
     json_response = requests.get(url).json()
@@ -96,11 +115,11 @@ def index():
 
 @app.route('/film/<path:path>')
 def film(path):
-    films = get_films()['results']
+    films = get_films_data()
 
-    for film in films:
-        if path == film['url'][-2:]:
-            response = get_url(film['url'])
+    for film in films.keys():
+        if path == route_id(film):
+            response = get_url(film)
 
     context = {
         "response": response,
@@ -115,7 +134,6 @@ def starship(path):
     ships = get_starship()
 
     for ship in ships.keys():
-        print(ship)
         if path == route_id(ship):
             response = get_url(ship)
 
@@ -124,6 +142,7 @@ def starship(path):
         "people": get_people(),
         "ships": get_starship(),
         "planets": get_planets(),
+        "films": get_films_data(),
     }
     return render_template('starship.html',**context)
 
@@ -141,6 +160,7 @@ def people(path):
         "people": get_people(),
         "ships": get_starship(),
         "planets": get_planets(),
+        "films": get_films_data(),
     }
     return render_template('character.html',**context)
 
@@ -158,6 +178,7 @@ def planet(path):
         "people": get_people(),
         "ships": get_starship(),
         "planets": get_planets(),
+        "films": get_films_data(),
     }
     return render_template('planet.html',**context)
 

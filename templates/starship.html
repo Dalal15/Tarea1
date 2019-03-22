@@ -4,7 +4,86 @@
    <div class="about">
      <h1>Starship Information</h1>
      <h2>{{response['name']}}</h2>
-     
+     <table>
+       <tbody>
+
+             <tr>
+               <th><center>Model</center></th>
+               <td><center>{{response['model']}}</center></td>
+              </tr>
+              <tr>
+                <th><center>Cost in credits</center></th>
+                <td><center>{{response['cost_in_credits']}}</center></td>
+               </tr>
+               <tr>
+                 <th><center>Manufacturer</center></th>
+                 <td><center>{{response['manufacturer']}}</center></td>
+                </tr>
+                <tr>
+                  <th><center>Length</center></th>
+                  <td><center>{{response['length']}}</center></td>
+                 </tr>
+                 <tr>
+                   <th><center>Speed</center></th>
+                   <td><center>{{response['max_atmosphering_speed']}}</center></td>
+                  </tr>
+                  <tr>
+                    <th><center>Crew</center></th>
+                    <td><center>{{response['crew']}}</center></td>
+                   </tr>
+                   <tr>
+                     <tr>
+                       <th><center>Passengers</center></th>
+                       <td><center>{{response['passengers']}}</center></td>
+                      </tr>
+                      <tr>
+                        <th><center>Capacity</center></th>
+                        <td><center>{{response['cargo_capacity']}}</center></td>
+                       </tr>
+
+                       <tr>
+                         <th><center>Consumables</center></th>
+                         <td><center>{{response['consumables']}}</center></td>
+                        </tr>
+                        <tr>
+                          <tr>
+                            <th><center>Hyperdrive rating</center></th>
+                            <td><center>{{response['hyperdrive_rating']}}</center></td>
+                           </tr>
+                           <tr>
+                             <th><center>MGLT</center></th>
+                             <td><center>{{response['MGLT']}}</center></td>
+                            </tr>
+                            <tr>
+                              <th><center>Starship class</center></th>
+                              <td><center>{{response['starship_class']}}</center></td>
+                             </tr>
+
+
+                  <tr>
+                    <th><center>Films</center></th>
+                    <td><center> {% for film in response['films']  %}
+                          <ul>
+                            <li> <a href={{"http://127.0.0.1:5000/film/" + film[::-1].split('/')[1][::-1]}}>{{films[film]}}</a></li>
+                          </ul>
+                          {% endfor %}
+                          </center></td>
+                   </tr>
+                   <tr>
+                     <th><center>Pilots</center></th>
+                     <td><center> {% for char in response['pilots']  %}
+                           <ul>
+                             <li> <a href={{"http://127.0.0.1:5000/people/" + char[::-1].split('/')[1][::-1]}}>{{people[char]}}</a></li>
+                           </ul>
+                           {% endfor %}
+                           </center></td>
+                    </tr>
+
+
+
+
+         </tbody>
+       </table>
    </div>
   </body>
 </html>
