@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <body>
+   <div class="about">
+     <h1>Film Information</h1>
+     <h2>{{response['title']}}</h2>
+     <table>
+       <tbody>
+
+             <tr>
+               <th><center>Episode number</center></th>
+               <td><center>{{response['episode_id']}}</center></td>
+              </tr>
+              <tr>
+                <th><center>Opening</center></th>
+                <td><center>{{response['opening_crawl']}}</center></td>
+               </tr>
+               <tr>
+                 <th><center>Director</center></th>
+                 <td><center>{{response['director']}}</center></td>
+                </tr>
+                <tr>
+                  <th><center>Producer(s)</center></th>
+                  <td><center>{{response['producer']}}</center></td>
+                 </tr>
+                 <tr>
+                   <th><center>Release date</center></th>
+                   <td><center>{{response['release_date']}}</center></td>
+                  </tr>
+                  <tr>
+                    <th><center>Characters</center></th>
+                    <td><center> {% for char in response['characters']  %}
+                          <ul>
+                            <li> <a href={{"http://127.0.0.1:5000/people/" + char[::-1].split('/')[1][::-1]}}>{{people[char]}}</a></li>
+                          </ul>
+                          {% endfor %}
+                          </center></td>
+                   </tr>
+                   <tr>
+                     <th><center>Planets</center></th>
+                     <td><center> {% for plan in response['planets']  %}
+                           <ul>
+                             <li> <a href={{"http://127.0.0.1:5000/planet/" + plan[::-1].split('/')[1][::-1]}}>{{planets[plan]}}</a> </li>
+                           </ul>
+                           {% endfor %}
+                           </center></td>
+                    </tr>
+                    <tr>
+                      <th><center>Starships</center></th>
+                      <td><center> {% for star in response['starships']  %}
+                            <ul>
+                              <li><a href={{"http://127.0.0.1:5000/starship/" + star[::-1].split('/')[1][::-1]}}>{{ships[star]}}</a>  </li>
+                            </ul>
+                            {% endfor %}
+                            </center></td>
+                     </tr>
+
+
+
+         </tbody>
+       </table>
+   </div>
+  </body>
+</html>

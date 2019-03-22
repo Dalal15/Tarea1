@@ -5,15 +5,24 @@ BASE_URL = 'http://swapi.co/api/'
 PLANET_URL = BASE_URL + 'planets/'
 SHIPS_URL = BASE_URL + 'starships/'
 FILM_URL = BASE_URL + 'films/'
+PEOPLE_URL = BASE_URL + 'people/'
 
-def get_planet(planet_id):
-    '''
-    Get json planet info
-    :param planet_id: string or integer number representing a planet
-    :return: json response
-    '''
-    json_response = requests.get(PLANET_URL + str(planet_id)).json()
-    return json_response
+def get_planets():
+
+    json_response = requests.get(PLANET_URL).json()
+    data = dict()
+
+    while json_response['next']:
+
+        for planet in json_response['results']:
+            data[planet['url']] = planet['name']
+
+        json_response = requests.get(json_response['next']).json()
+
+    for planet in json_response['results']:
+        data[planet['url']] = planet['name']
+
+    return data
 
 def get_films():
     '''
@@ -23,14 +32,56 @@ def get_films():
     json_response = requests.get(FILM_URL).json()
     return json_response
 
-def get_ship(ship_id):
+def get_people():
     '''
-    Get json ship info
-    :param ship_id: string or integer number representing a ship
+    Get json film info
     :return: json response
     '''
-    json_response = requests.get(SHIPS_URL + str(ship_id)).json()
+    json_response = requests.get(PEOPLE_URL).json()
+
+
+    data = dict()
+
+    while json_response['next']:
+
+        for person in json_response['results']:
+            data[person['url']] = person['name']
+
+        json_response = requests.get(json_response['next']).json()
+
+    for person in json_response['results']:
+        data[person['url']] = person['name']
+
+
+
+    return data
+
+def get_starship():
+
+    json_response = requests.get(SHIPS_URL).json()
+
+    data = dict()
+
+    while json_response['next']:
+
+        for ship in json_response['results']:
+            data[ship['url']] = ship['name']
+
+        json_response = requests.get(json_response['next']).json()
+
+    for ship in json_response['results']:
+        data[ship['url']] = ship['name']
+
+    return data
+
+def get_url(url):
+
+    json_response = requests.get(url).json()
     return json_response
+
+def route_id(url):
+    return url[::-1].split('/')[1][::-1]
+
 
 
 app = Flask(__name__)
@@ -42,6 +93,73 @@ def index():
         "films": get_films()['results'],
     }
     return render_template("index.html", **context)
+
+@app.route('/film/<path:path>')
+def film(path):
+    films = get_films()['results']
+
+    for film in films:
+        if path == film['url'][-2:]:
+            response = get_url(film['url'])
+
+    context = {
+        "response": response,
+        "people": get_people(),
+        "ships": get_starship(),
+        "planets": get_planets(),
+    }
+    return render_template('film.html',**context)
+
+@app.route('/starship/<path:path>')
+def starship(path):
+    ships = get_starship()
+
+    for ship in ships.keys():
+        print(ship)
+        if path == route_id(ship):
+            response = get_url(ship)
+
+    context = {
+        "response": response,
+        "people": get_people(),
+        "ships": get_starship(),
+        "planets": get_planets(),
+    }
+    return render_template('starship.html',**context)
+
+@app.route('/people/<path:path>')
+def people(path):
+    people = get_people()
+
+    for char in people.keys():
+
+        if path == route_id(char):
+            response = get_url(char)
+
+    context = {
+        "response": response,
+        "people": get_people(),
+        "ships": get_starship(),
+        "planets": get_planets(),
+    }
+    return render_template('character.html',**context)
+
+@app.route('/planet/<path:path>')
+def planet(path):
+    planets = get_planets()
+
+    for plan in planets.keys():
+
+        if path == route_id(plan):
+            response = get_url(plan)
+
+    context = {
+        "response": response,
+        "people": get_people(),
+        "ships": get_starship(),
+        "planets": get_planets(),
+    }
+    return render_template('planet.html',**context)
 
 if __name__ == '__main__':
 
