@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+  <body>
+   <div class="about">
+     <form action="http://127.0.0.1:5000/search" method="post">
+    <input type="text" name="searching">
+    <input type="submit" value ="Search">
+</form>
+     <h1>Results about: {{response}}</h1>
+     <h2>Planets results </h2>
+     <table>
+       <thead>
+           <tr>
+             <th>&emsp;Name&emsp;</th>
+             <th>&emsp;Rotation period&emsp;</th>
+             <th>&emsp;Orbital period&emsp;</th>
+             <th>&emsp;Diameter&emsp;</th>
+             <th>&emsp;Climate&emsp;</th>
+             <th colspan="3"></th>
+           </tr>
+         </thead>
+
+         <tbody>
+           {% for planet in data["planets"] %}
+             <tr>
+               <td><center>  <a href={{"http://127.0.0.1:5000/planet/" + planet['url'][::-1].split('/')[1][::-1]}}>{{planet['name']}}</a> </center></td>
+               <td><center>{{planet['rotation_period']}}</center></td>
+               <td><center>{{planet['orbital_period']}}</center></td>
+               <td><center>{{planet['diameter']}}</center></td>
+               <td><center>{{planet['climate']}}</center></td>
+
+             </tr>
+           {% endfor %}
+         </tbody>
+       </table>
+
+
+       <h2>People results </h2>
+       <table>
+         <thead>
+             <tr>
+               <th>&emsp;Name&emsp;</th>
+               <th>&emsp;Height&emsp;</th>
+               <th>&emsp;Mass&emsp;</th>
+               <th>&emsp;Gender&emsp;</th>
+               <th>&emsp;Hair color&emsp;</th>
+               <th colspan="3"></th>
+             </tr>
+           </thead>
+
+           <tbody>
+             {% for people in data["people"] %}
+               <tr>
+                 <td><center>  <a href={{"http://127.0.0.1:5000/people/" + people['url'][::-1].split('/')[1][::-1]}}>{{people['name']}}</a> </center></td>
+                 <td><center>{{people['height']}}</center></td>
+                 <td><center>{{people['mass']}}</center></td>
+                 <td><center>{{people['gender']}}</center></td>
+                 <td><center>{{people['hair_color']}}</center></td>
+
+               </tr>
+             {% endfor %}
+           </tbody>
+         </table>
+
+
+
+         <h2>Film results </h2>
+         <table>
+           <thead>
+               <tr>
+                 <th>&emsp;Name&emsp;</th>
+                 <th>&emsp;Release date&emsp;</th>
+                 <th>&emsp;Director&emsp;</th>
+                 <th>&emsp;Producer(s)&emsp;</th>
+                 <th>&emsp;Episode number&emsp;</th>
+                 <th colspan="3"></th>
+               </tr>
+             </thead>
+
+             <tbody>
+               {% for film in data['films'] %}
+                 <tr>
+                   <td><center>  <a href={{"http://127.0.0.1:5000/film/" + film['url'][::-1].split('/')[1][::-1]}}>{{film['title']}}</a> </center></td>
+                   <td><center>{{film['release_date']}}</center></td>
+                   <td><center>{{film['director']}}</center></td>
+                   <td><center>{{film['producer']}}</center></td>
+                   <td><center>{{film['episode_id']}}</center></td>
+
+                 </tr>
+               {% endfor %}
+             </tbody>
+           </table>
+
+           <h2>Staships results </h2>
+           <table>
+             <thead>
+                 <tr>
+                   <th>&emsp;Name&emsp;</th>
+                   <th>&emsp;Model&emsp;</th>
+                   <th>&emsp;Length&emsp;</th>
+                   <th>&emsp;Passengers&emsp;</th>
+                   <th>&emsp;Consumables&emsp;</th>
+                   <th colspan="3"></th>
+                 </tr>
+               </thead>
+
+               <tbody>
+                 {% for ship in data['ships'] %}
+                   <tr>
+                     <td><center>  <a href={{"http://127.0.0.1:5000/starship/" + ship['url'][::-1].split('/')[1][::-1]}}>{{ship['name']}}</a> </center></td>
+                     <td><center>{{ship['model']}}</center></td>
+                     <td><center>{{ship['length']}}</center></td>
+                     <td><center>{{ship['passengers']}}</center></td>
+                     <td><center>{{ship['consumables']}}</center></td>
+
+                   </tr>
+                 {% endfor %}
+               </tbody>
+             </table>
+
+   </div>
+  </body>
+</html>

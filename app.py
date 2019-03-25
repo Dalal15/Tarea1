@@ -1,11 +1,116 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import requests
+import json
 
 BASE_URL = 'http://swapi.co/api/'
 PLANET_URL = BASE_URL + 'planets/'
 SHIPS_URL = BASE_URL + 'starships/'
 FILM_URL = BASE_URL + 'films/'
 PEOPLE_URL = BASE_URL + 'people/'
+
+def get_all(search):
+    json_planet = requests.get(PLANET_URL).json()
+    json_star = requests.get(SHIPS_URL).json()
+    json_film = requests.get(FILM_URL).json()
+    json_people = requests.get(PEOPLE_URL).json()
+
+    data = dict()
+    lista_planet = []
+    lista_people = []
+    lista_film = []
+    lista_star = []
+
+    #Buscar en planetas
+    while json_planet['next']:
+
+        for planet in json_planet['results']:
+            for value in planet.values():
+                if search in str(value):
+                    print("encontrado")
+                    lista_planet.append(planet)
+                    data['planets'] = lista_planet
+                    break
+
+
+        json_planet = requests.get(json_planet['next']).json()
+
+    for planet in json_planet['results']:
+        for value in planet.values():
+            if search in str(value):
+                print("encontrado")
+                lista_planet.append(planet)
+                data['planets'] = lista_planet
+                break
+
+    #Buscar en personas
+    while json_people['next']:
+
+        for people in json_people['results']:
+
+            for value in people.values():
+                if search in str(value):
+                    print("encontrado")
+                    lista_people.append(people)
+                    data['people'] = lista_people
+                    break
+
+
+        json_people = requests.get(json_people['next']).json()
+
+    for people in json_people['results']:
+        for value in people.values():
+            if search in str(value):
+                print("encontrado")
+                lista_people.append(people)
+                data['people'] = lista_people
+                break
+
+    #Buscar en ships
+    while json_star['next']:
+
+        for ship in json_star['results']:
+            for value in ship.values():
+
+                if search in str(value):
+
+                    lista_star.append(ship)
+                    data['ships'] = lista_star
+                    break
+
+
+        json_star = requests.get(json_star['next']).json()
+
+    for ship in json_star['results']:
+        for value in ship.values():
+            if search in str(value):
+                print("encontrado")
+                lista_star.append(ship)
+                data['ships'] = lista_star
+                break
+
+    #Buscar en peliculas
+    while json_film['next']:
+
+        for film in json_film['results']:
+            for value in film.values():
+
+                if search in str(value):
+
+                    lista_film.append(film)
+                    data['films'] = lista_film
+                    break
+
+
+        json_film = requests.get(json_film['next']).json()
+
+    for film in json_film['results']:
+        for value in film.values():
+            if search in str(value):
+                print("encontrado")
+                lista_film.append(film)
+                data['films'] = lista_film
+
+    return data
 
 def get_planets():
 
@@ -163,6 +268,19 @@ def people(path):
         "films": get_films_data(),
     }
     return render_template('character.html',**context)
+
+@app.route('/search' , methods=['POST'])
+def search():
+
+    response = request.form['searching']
+
+    data = get_all(response)
+
+    context = {
+        "response": response,
+        "data": data,
+    }
+    return render_template('search.html',**context)
 
 @app.route('/planet/<path:path>')
 def planet(path):

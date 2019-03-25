@@ -2,6 +2,10 @@
 <html>
   <body>
    <div class="about">
+     <form action="http://127.0.0.1:5000/search" method="post">
+    <input type="text" name="searching">
+    <input type="submit" value ="Search">
+</form>
      <h1>Film Information</h1>
      <h2>{{response['title']}}</h2>
      <table>
@@ -31,7 +35,7 @@
                     <th><center>Characters</center></th>
                     <td><center> {% for char in response['characters']  %}
                           <ul>
-                            <li> <a href={{"https://afternoon-falls-55959.herokuapp.com/people/" + char[::-1].split('/')[1][::-1]}}>{{people[char]}}</a></li>
+                            <li> <a href={{"http://127.0.0.1:5000//people/" + char[::-1].split('/')[1][::-1]}}>{{people[char]}}</a></li>
                           </ul>
                           {% endfor %}
                           </center></td>
@@ -40,7 +44,7 @@
                      <th><center>Planets</center></th>
                      <td><center> {% for plan in response['planets']  %}
                            <ul>
-                             <li> <a href={{"https://afternoon-falls-55959.herokuapp.com/planet/" + plan[::-1].split('/')[1][::-1]}}>{{planets[plan]}}</a> </li>
+                             <li> <a href={{"http://127.0.0.1:5000/planet/" + plan[::-1].split('/')[1][::-1]}}>{{planets[plan]}}</a> </li>
                            </ul>
                            {% endfor %}
                            </center></td>
@@ -49,7 +53,7 @@
                       <th><center>Starships</center></th>
                       <td><center> {% for star in response['starships']  %}
                             <ul>
-                              <li><a href={{"https://afternoon-falls-55959.herokuapp.com/starship/" + star[::-1].split('/')[1][::-1]}}>{{ships[star]}}</a>  </li>
+                              <li><a href={{"http://127.0.0.1:5000/starship/" + star[::-1].split('/')[1][::-1]}}>{{ships[star]}}</a>  </li>
                             </ul>
                             {% endfor %}
                             </center></td>

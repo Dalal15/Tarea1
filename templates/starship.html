@@ -2,6 +2,11 @@
 <html>
   <body>
    <div class="about">
+     <form action="http://127.0.0.1:5000/search" method="post">
+    <input type="text" name="searching">
+    <input type="submit" value ="Search">
+</form>
+
      <h1>Starship Information</h1>
      <h2>{{response['name']}}</h2>
      <table>
