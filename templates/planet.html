@@ -2,7 +2,7 @@
 <html>
   <body>
    <div class="about">
-     <form action="http://127.0.0.1:5000/search" method="post">
+     <form action="https://afternoon-falls-55959.herokuapp.com/search" method="post">
     <input type="text" name="searching">
     <input type="submit" value ="Search">
 </form>
@@ -49,7 +49,7 @@
                     <th><center>Films</center></th>
                     <td><center> {% for film in response['films']  %}
                           <ul>
-                            <li> <a href={{"http://127.0.0.1:5000/film/" + film[::-1].split('/')[1][::-1]}}>{{films[film]}}</a></li>
+                            <li> <a href={{"https://afternoon-falls-55959.herokuapp.com/film/" + film[::-1].split('/')[1][::-1]}}>{{films[film]}}</a></li>
                           </ul>
                           {% endfor %}
                           </center></td>
@@ -58,7 +58,7 @@
                      <th><center>Residents</center></th>
                      <td><center> {% for char in response['residents']  %}
                            <ul>
-                             <li> <a href={{"http://127.0.0.1:5000/people/" + char[::-1].split('/')[1][::-1]}}>{{people[char]}}</a></li>
+                             <li> <a href={{"https://afternoon-falls-55959.herokuapp.com/people/" + char[::-1].split('/')[1][::-1]}}>{{people[char]}}</a></li>
                            </ul>
                            {% endfor %}
                            </center></td>
