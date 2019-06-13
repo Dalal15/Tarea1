@@ -37,14 +37,14 @@
                    </tr>
                    <tr>
                      <th><center>Homeworld</center></th>
-                     <td><center><a href={{"http://127.0.0.1:5000/planet/" + response['homeworld']['id']}}>{{response['homeworld']['name']}}</a></center></td>
+                     <td><center><a href={{"https://afternoon-falls-55959.herokuapp.com/planet/" + response['homeworld']['id']}}>{{response['homeworld']['name']}}</a></center></td>
                     </tr>
 
                   <tr>
                     <th><center>Films</center></th>
                     <td><center> {% for film in response['filmConnection']['films']  %}
                           <ul>
-                            <li> <a href={{"http://127.0.0.1:5000/film/" + film['id']}}>{{film['title']}}</a></li>
+                            <li> <a href={{"https://afternoon-falls-55959.herokuapp.com/film/" + film['id']}}>{{film['title']}}</a></li>
                           </ul>
                           {% endfor %}
                           </center></td>
@@ -53,7 +53,7 @@
                       <th><center>Starships</center></th>
                       <td><center> {% for star in response['starshipConnection']['starships']  %}
                             <ul>
-                              <li> <a href={{"http://127.0.0.1:5000/starship/"+ star['id']}}>{{star['name']}}</a></li>
+                              <li> <a href={{"https://afternoon-falls-55959.herokuapp.com/starship/"+ star['id']}}>{{star['name']}}</a></li>
                             </ul>
                             {% endfor %}
                             </center></td>
