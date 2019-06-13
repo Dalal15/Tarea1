@@ -13,11 +13,11 @@
 
              <tr>
                <th><center>Rotation period</center></th>
-               <td><center>{{response['rotation_period']}}</center></td>
+               <td><center>{{response['rotationPeriod']}}</center></td>
               </tr>
               <tr>
                 <th><center>Orbital period</center></th>
-                <td><center>{{response['orbital_period']}}</center></td>
+                <td><center>{{response['orbitalPeriod']}}</center></td>
                </tr>
                <tr>
                  <th><center>Diameter</center></th>
@@ -25,7 +25,7 @@
                 </tr>
                 <tr>
                   <th><center>Climate</center></th>
-                  <td><center>{{response['climate']}}</center></td>
+                  <td><center>{{response['climates']}}</center></td>
                  </tr>
                  <tr>
                    <th><center>Gravity</center></th>
@@ -33,12 +33,12 @@
                   </tr>
                   <tr>
                     <th><center>Terrain</center></th>
-                    <td><center>{{response['terrain']}}</center></td>
+                    <td><center>{{response['terrains']}}</center></td>
                    </tr>
                    <tr>
                      <tr>
                        <th><center>Surface water</center></th>
-                       <td><center>{{response['surface_water']}}</center></td>
+                       <td><center>{{response['surfaceWater']}}</center></td>
                       </tr>
                       <tr>
                         <th><center>Population</center></th>
@@ -47,18 +47,18 @@
 
                   <tr>
                     <th><center>Films</center></th>
-                    <td><center> {% for film in response['films']  %}
+                    <td><center> {% for film in response['filmConnection']['films']  %}
                           <ul>
-                            <li> <a href={{"https://afternoon-falls-55959.herokuapp.com/film/" + film[::-1].split('/')[1][::-1]}}>{{films[film]}}</a></li>
+                          <li> <a href={{"http://127.0.0.1:5000/film/" + film['id']}}>{{film['title']}}</a></li>
                           </ul>
                           {% endfor %}
                           </center></td>
                    </tr>
                    <tr>
                      <th><center>Residents</center></th>
-                     <td><center> {% for char in response['residents']  %}
+                     <td><center> {% for char in response['residentConnection']['residents']  %}
                            <ul>
-                             <li> <a href={{"https://afternoon-falls-55959.herokuapp.com/people/" + char[::-1].split('/')[1][::-1]}}>{{people[char]}}</a></li>
+                              <li> <a href={{"http://127.0.0.1:5000/people/" + char['id']}}>{{char['name']}}</a></li>
                            </ul>
                            {% endfor %}
                            </center></td>

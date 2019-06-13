@@ -13,11 +13,11 @@
 
              <tr>
                <th><center>Episode number</center></th>
-               <td><center>{{response['episode_id']}}</center></td>
+               <td><center>{{response['episodeID']}}</center></td>
               </tr>
               <tr>
                 <th><center>Opening</center></th>
-                <td><center>{{response['opening_crawl']}}</center></td>
+                <td><center>{{response['openingCrawl']}}</center></td>
                </tr>
                <tr>
                  <th><center>Director</center></th>
@@ -25,39 +25,42 @@
                 </tr>
                 <tr>
                   <th><center>Producer(s)</center></th>
-                  <td><center>{{response['producer']}}</center></td>
+                  <td><center>{{response['producers']}}</center></td>
                  </tr>
                  <tr>
                    <th><center>Release date</center></th>
-                   <td><center>{{response['release_date']}}</center></td>
+                   <td><center>{{response['releaseDate']}}</center></td>
                   </tr>
                   <tr>
                     <th><center>Characters</center></th>
-                    <td><center> {% for char in response['characters']  %}
+                    <td><center> {% for char in response['characterConnection']['characters']  %}
                           <ul>
-                            <li> <a href={{"https://afternoon-falls-55959.herokuapp.com/people/" + char[::-1].split('/')[1][::-1]}}>{{people[char]}}</a></li>
+                            <li> <a href={{"http://127.0.0.1:5000/people/"+ char['id']}}>{{char['name']}}</a></li>
                           </ul>
                           {% endfor %}
                           </center></td>
                    </tr>
+
                    <tr>
                      <th><center>Planets</center></th>
-                     <td><center> {% for plan in response['planets']  %}
+                     <td><center> {% for plan in response['planetConnection']['planets']  %}
                            <ul>
-                             <li> <a href={{"https://afternoon-falls-55959.herokuapp.com/planet/" + plan[::-1].split('/')[1][::-1]}}>{{planets[plan]}}</a> </li>
+                             <li> <a href={{"http://127.0.0.1:5000/planet/"+ plan['id']}}>{{plan['name']}}</a></li>
                            </ul>
                            {% endfor %}
                            </center></td>
                     </tr>
+
                     <tr>
                       <th><center>Starships</center></th>
-                      <td><center> {% for star in response['starships']  %}
+                      <td><center> {% for star in response['starshipConnection']['starships']  %}
                             <ul>
-                              <li><a href={{"https://afternoon-falls-55959.herokuapp.com/starship/" + star[::-1].split('/')[1][::-1]}}>{{ships[star]}}</a>  </li>
+                              <li> <a href={{"http://127.0.0.1:5000/starship/"+ star['id']}}>{{star['name']}}</a></li>
                             </ul>
                             {% endfor %}
                             </center></td>
                      </tr>
+
 
 
 

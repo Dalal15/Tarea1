@@ -18,11 +18,11 @@
               </tr>
               <tr>
                 <th><center>Cost in credits</center></th>
-                <td><center>{{response['cost_in_credits']}}</center></td>
+                <td><center>{{response['costInCredits']}}</center></td>
                </tr>
                <tr>
                  <th><center>Manufacturer</center></th>
-                 <td><center>{{response['manufacturer']}}</center></td>
+                 <td><center>{{response['manufacturers']}}</center></td>
                 </tr>
                 <tr>
                   <th><center>Length</center></th>
@@ -30,7 +30,7 @@
                  </tr>
                  <tr>
                    <th><center>Speed</center></th>
-                   <td><center>{{response['max_atmosphering_speed']}}</center></td>
+                   <td><center>{{response['maxAtmospheringSpeed']}}</center></td>
                   </tr>
                   <tr>
                     <th><center>Crew</center></th>
@@ -43,7 +43,7 @@
                       </tr>
                       <tr>
                         <th><center>Capacity</center></th>
-                        <td><center>{{response['cargo_capacity']}}</center></td>
+                        <td><center>{{response['cargoCapacity']}}</center></td>
                        </tr>
 
                        <tr>
@@ -53,7 +53,7 @@
                         <tr>
                           <tr>
                             <th><center>Hyperdrive rating</center></th>
-                            <td><center>{{response['hyperdrive_rating']}}</center></td>
+                            <td><center>{{response['hyperdriveRating']}}</center></td>
                            </tr>
                            <tr>
                              <th><center>MGLT</center></th>
@@ -61,24 +61,24 @@
                             </tr>
                             <tr>
                               <th><center>Starship class</center></th>
-                              <td><center>{{response['starship_class']}}</center></td>
+                              <td><center>{{response['starshipClass']}}</center></td>
                              </tr>
 
 
                   <tr>
                     <th><center>Films</center></th>
-                    <td><center> {% for film in response['films']  %}
+                    <td><center> {% for film in response['filmConnection']['films']  %}
                           <ul>
-                            <li> <a href={{"https://afternoon-falls-55959.herokuapp.com/film/" + film[::-1].split('/')[1][::-1]}}>{{films[film]}}</a></li>
+                            <li> <a href={{"http://127.0.0.1:5000/film/" + film['id']}}>{{film['title']}}</a></li>
                           </ul>
                           {% endfor %}
                           </center></td>
                    </tr>
                    <tr>
                      <th><center>Pilots</center></th>
-                     <td><center> {% for char in response['pilots']  %}
+                     <td><center> {% for char in response['pilotConnection']['pilots']  %}
                            <ul>
-                             <li> <a href={{"https://afternoon-falls-55959.herokuapp.com/people/" + char[::-1].split('/')[1][::-1]}}>{{people[char]}}</a></li>
+                             <li> <a href={{"http://127.0.0.1:5000/people/" + char['id']}}>{{char['name']}}</a></li>
                            </ul>
                            {% endfor %}
                            </center></td>

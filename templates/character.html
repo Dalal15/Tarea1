@@ -21,39 +21,39 @@
                </tr>
                <tr>
                  <th><center>Hair color</center></th>
-                 <td><center>{{response['hair_color']}}</center></td>
+                 <td><center>{{response['hairColor']}}</center></td>
                 </tr>
                 <tr>
                   <th><center>Skin color</center></th>
-                  <td><center>{{response['skin_color']}}</center></td>
+                  <td><center>{{response['skinColor']}}</center></td>
                  </tr>
                  <tr>
                    <th><center>Eye color</center></th>
-                   <td><center>{{response['eye_color']}}</center></td>
+                   <td><center>{{response['eyeColor']}}</center></td>
                   </tr>
                   <tr>
                     <th><center>Birth year</center></th>
-                    <td><center>{{response['birth_year']}}</center></td>
+                    <td><center>{{response['birthYear']}}</center></td>
                    </tr>
                    <tr>
                      <th><center>Homeworld</center></th>
-                     <td><center><a href={{"https://afternoon-falls-55959.herokuapp.com/planet/" + response['homeworld'][::-1].split('/')[1][::-1]}}>{{planets[response['homeworld']]}}</a></center></td>
+                     <td><center><a href={{"http://127.0.0.1:5000/planet/" + response['homeworld']['id']}}>{{response['homeworld']['name']}}</a></center></td>
                     </tr>
 
                   <tr>
                     <th><center>Films</center></th>
-                    <td><center> {% for film in response['films']  %}
+                    <td><center> {% for film in response['filmConnection']['films']  %}
                           <ul>
-                            <li> <a href={{"https://afternoon-falls-55959.herokuapp.com/film/" + film[::-1].split('/')[1][::-1]}}>{{films[film]}}</a></li>
+                            <li> <a href={{"http://127.0.0.1:5000/film/" + film['id']}}>{{film['title']}}</a></li>
                           </ul>
                           {% endfor %}
                           </center></td>
                    </tr>
                     <tr>
                       <th><center>Starships</center></th>
-                      <td><center> {% for star in response['starships']  %}
+                      <td><center> {% for star in response['starshipConnection']['starships']  %}
                             <ul>
-                              <li><a href={{"https://afternoon-falls-55959.herokuapp.com/starship/" + star[::-1].split('/')[1][::-1]}}>{{ships[star]}}</a>  </li>
+                              <li> <a href={{"http://127.0.0.1:5000/starship/"+ star['id']}}>{{star['name']}}</a></li>
                             </ul>
                             {% endfor %}
                             </center></td>
