@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
+<head>
+  <link rel ="stylesheet" type="text/css" href="/static/css/table.css">
+</head>
   <body>
    <div class="about">
-     <form action="https://afternoon-falls-55959.herokuapp.com/search" method="post">
-    <input type="text" name="searching">
-    <input type="submit" value ="Search">
-</form>
+     <center>
      <h1>Planet Information</h1>
-     <h2>{{response['name']}}</h2>
-     <table>
+     <h1>{{response['name']}}</h1>
+     <table id="customers">
        <tbody>
 
              <tr>
@@ -25,7 +25,12 @@
                 </tr>
                 <tr>
                   <th><center>Climate</center></th>
-                  <td><center>{{response['climates']}}</center></td>
+                  <td><center> {% for char in response['climates']  %}
+                        <ul>
+                          <li> {{char}}</a></li>
+                        </ul>
+                        {% endfor %}
+                    </center></td>
                  </tr>
                  <tr>
                    <th><center>Gravity</center></th>
@@ -33,7 +38,12 @@
                   </tr>
                   <tr>
                     <th><center>Terrain</center></th>
-                    <td><center>{{response['terrains']}}</center></td>
+                    <td><center> {% for char in response['terrains']  %}
+                          <ul>
+                            <li> {{char}}</a></li>
+                          </ul>
+                          {% endfor %}
+                      </center></td>
                    </tr>
                    <tr>
                      <tr>
@@ -70,5 +80,6 @@
          </tbody>
        </table>
    </div>
+ </center>
   </body>
 </html>

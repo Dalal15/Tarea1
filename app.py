@@ -55,6 +55,7 @@ film(id: "%s") {
 id
 episodeID
 title
+releaseDate
 director
 producers
 openingCrawl
@@ -174,6 +175,7 @@ def planet(path):
     query = '''query {
 planet(id: "%s") {
   id
+  name
   orbitalPeriod
   rotationPeriod
   diameter

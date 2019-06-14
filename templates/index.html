@@ -2,18 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel ="stylesheet" type="text/css" href="/static/css/table.css">
     <title>Star Wars</title>
 </head>
 <body>
     <div id="fb-root"></div>
     <div>
-      <form action="https://afternoon-falls-55959.herokuapp.com/search" method="post">
-     <input type="text" name="searching">
-     <input type="submit" value ="Search">
- </form>
+        <center>
         <h1>Star wars films</h1>
 
-        <table>
+        <table id ="customers">
           <thead>
               <tr>
                 <th>&emsp;Name&emsp;</th>
@@ -32,15 +30,20 @@
                   <td><center>  <a href={{"https://afternoon-falls-55959.herokuapp.com/film/"+ film['node']['id']}}>{{film['node']['title']}}</a> </center></td>
                   <td><center>{{film['node']['releaseDate']}}</center></td>
                   <td><center>{{film['node']['director']}}</center></td>
-                  <td><center>{{film['node']['producers']}}</center></td>
+                  <td><center> {% for char in film['node']['producers']  %}
+                        <ul>
+                          <li> {{char}}</a></li>
+                        </ul>
+                        {% endfor %}
+                    </center></td>
                   <td><center>{{film['node']['episodeID']}}</center></td>
-                  <td><center>  <a href="https://afternoon-falls-55959.herokuapp.com/film/"+ film['node']['id']}}>See more</a> </center></td>
+                  <td><center>  <a href={{"https://afternoon-falls-55959.herokuapp.com/film/"+ film['node']['id']}}>See more</a> </center></td>
 
                 </tr>
               {% endfor %}
             </tbody>
           </table>
-
+        </center>
 
     </div>
 
